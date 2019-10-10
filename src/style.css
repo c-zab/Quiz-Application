@@ -1,3 +1,11 @@
-h1 {
-  color: red;
+.bg-green {
+  background-color: teal;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.block {
+  display: block;
 }
