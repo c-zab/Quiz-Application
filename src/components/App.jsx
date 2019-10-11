@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import QuestionList from './quiz/QuestionList.jsx'
+import Results from './quiz/Result.jsx'
+import ScoreBoard from './quiz/ScoreBoard.jsx'
 
 class App extends Component {
   constructor(props) {
@@ -98,9 +100,33 @@ class App extends Component {
           ],
           correct: 'a'
         },
+        {
+          id: 5,
+          text: "What is your name?",
+          choices: [
+            {
+              id: 'a',
+              text: 'Sergio'
+            },
+            {
+              id: 'b',
+              text: 'Sady'
+            },
+            {
+              id: 'c',
+              text: 'Xato'
+            },
+            {
+              id: 'd',
+              text: 'Carlos'
+            },
+          ],
+          correct: 'd'
+        },
       ],
       score: 0,
-      current: 1
+      current: 1,
+      points: 20
     }
   }
 
@@ -111,7 +137,7 @@ class App extends Component {
           return {
             ...state,
             current: state.current + 1,
-            score: state.score + 20
+            score: state.score + state.points
           }
         })
       } else {
@@ -126,19 +152,23 @@ class App extends Component {
   }
 
   render() {
-    const {questions, score, current} = this.state;
-
+    const {questions, score, current, points} = this.state;
     return (
       <div className='container'>
         <h1>Quiz React</h1>
         <p>Quiz Application built in React</p>
-        <p><strong>{(questions.length >= current) ? `Your score is: `: `Your final score is: `} {score}</strong></p>
-        <QuestionList
-          questions={questions}
-          score={score}
-          current={current}
-          nextQuestion={this.nextQuestion}
-        />
+        {(current <= questions.length) ?
+          <React.Fragment>
+            <ScoreBoard total={questions.length} current={current} score={score} />
+            <QuestionList
+              questions={questions}
+              score={score}
+              current={current}
+              nextQuestion={this.nextQuestion}
+            />
+          </React.Fragment>
+          : <Results total={questions.length} correct={score/points} percentage={parseInt((score/(questions.length*points))*100, 10)} />
+        }
       </div>
     )
   }

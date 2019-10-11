@@ -34,7 +34,7 @@ p {
   background: whitesmoke;
 }
 
-.result-content {
+.scoreboard-content {
   width: 80%;
   padding: 20px;
   background-color: rgba(137, 138, 150, 0.185);
@@ -46,4 +46,17 @@ p {
 
 .score {
   margin-left: auto;
+}
+
+.result-content {
+  width: 80%;
+  padding: 20px;
+  background-color: rgba(137, 138, 150, 0.185);
+  margin: 10px auto;
+  border: 0.5px solid rgba(44, 45, 49, 0.39);
+}
+
+.percentage {
+  font-size: 2rem;
+  margin: 5px 0;
 }
