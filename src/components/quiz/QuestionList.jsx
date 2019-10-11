@@ -1,12 +1,14 @@
 import React from 'react'
 import Question from './Question.jsx'
 
-const QuestionList = ({questions, score, current}) => {
+const QuestionList = ({questions, current, nextQuestion}) => {
   return (
-    <div>
-      {questions.map(item => {
-        return <Question key={item.id} question={item} />
-      })}
+    <div className="pure-g">
+      {questions.filter(question => question.id === current)
+        .map(item => {
+          return <Question key={item.id} question={item} nextQuestion={nextQuestion}/>
+        })
+      }
     </div>
   )
 }

@@ -35,19 +35,19 @@ class App extends Component {
           choices: [
             {
               id: 'a',
-              text: 'Michael'
+              text: 'Juan'
             },
             {
               id: 'b',
-              text: 'Brad'
+              text: 'Anthony'
             },
             {
               id: 'c',
-              text: 'Pewds'
+              text: 'Steve'
             },
             {
               id: 'd',
-              text: 'Steven'
+              text: 'Carlos'
             },
           ],
           correct: 'c'
@@ -104,12 +104,41 @@ class App extends Component {
     }
   }
 
+  nextQuestion = (answer) => {
+    setTimeout(() => {
+      if(answer) {
+        this.setState(state => {
+          return {
+            ...state,
+            current: state.current + 1,
+            score: state.score + 20
+          }
+        })
+      } else {
+        this.setState(state => {
+          return {
+            ...state,
+            current: state.current + 1,
+          }
+        })
+      }
+    }, 500);
+  }
+
   render() {
     const {questions, score, current} = this.state;
 
     return (
-      <div>
-        <QuestionList questions={questions} score={score} current={current} ></QuestionList>
+      <div className='container'>
+        <h1>Quiz React</h1>
+        <p>Quiz Application built in React</p>
+        <p><strong>{(questions.length >= current) ? `Your score is: `: `Your final score is: `} {score}</strong></p>
+        <QuestionList
+          questions={questions}
+          score={score}
+          current={current}
+          nextQuestion={this.nextQuestion}
+        />
       </div>
     )
   }
